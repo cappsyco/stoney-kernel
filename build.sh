@@ -15,16 +15,18 @@ tarball_name="$(echo $tarball_url | cut -f 8 -d '/')"
 distros=('alpine' 'none')
 
 function build_kernel {
-	  arch=x86_64
 
-      # Clear source_dir
-      rm -r ${source_dir}/*
+    arch=x86_64
 
-	  # Install amdgpu firmware
-	  firmware_dir=${source_dir}/stoney_firmware
-	  mkdir -p ${firmware_dir}/amdgpu
-	  cp -r /lib/firmware/amdgpu/stoney* ${firmware_dir}/amdgpu
-	  # doesn't matter if decompression fails
+    # Clear source_dir and build_dir
+    rm -r ${source_dir}/* & rm -r ${build_dir}/*
+
+    # Install amdgpu firmware
+    firmware_dir=${source_dir}/stoney_firmware
+    mkdir -p ${firmware_dir}/amdgpu
+    cp -r /lib/firmware/amdgpu/stoney* ${firmware_dir}/amdgpu
+	
+    # doesn't matter if decompression fails
     xz_count=`ls -1 ${firmware_dir}/amdgpu/stoney*.xz 2>/dev/null | wc -l`
     zst_count=`ls -1 ${firmware_dir}/amdgpu/stoney*.zst 2>/dev/null | wc -l`
 	  if [ $xz_count != 0 ]; then
