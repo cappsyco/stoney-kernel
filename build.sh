@@ -17,6 +17,9 @@ distros=('alpine' 'none')
 function build_kernel {
 	  arch=x86_64
 
+      # Clear source_dir
+      rm -r ${source_dir}/*
+
 	  # Install amdgpu firmware
 	  firmware_dir=${source_dir}/stoney_firmware
 	  mkdir -p ${firmware_dir}/amdgpu
