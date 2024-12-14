@@ -19,7 +19,7 @@ function build_kernel {
     arch=x86_64
 
     # Remove source_dir and build_dir
-    rm -r ${source_dir} & rm -r ${build_dir}
+    rm -rf ${source_dir} & rm -rf ${build_dir}
 
     # Install amdgpu firmware
     firmware_dir=${source_dir}/stoney_firmware
